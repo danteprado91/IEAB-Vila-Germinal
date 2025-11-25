@@ -1,2 +1,408 @@
-# IEAB-Vila-Germinal
-Site gratuito para a igreja evangélica avivamento biblico em vila germinal
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Site oficial da [NOME DA IGREJA] - Projeto de Extensão Universitária - Ampli 2025">
+    <title>IEAB | Vila Germinal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* --- 1. CONFIGURAÇÕES GERAIS (CSS) --- */
+        :root {
+            /* Mude as cores aqui para combinar com a identidade da igreja */
+            --cor-primaria: #2c3e50; /* Azul Marinho (quase preto) */
+            --cor-secundaria: #3498db; /* Azul Claro (para links/destaques) */
+            --cor-fundo: #ecf0f1; /* Cinza claro */
+            --cor-texto: #34495e; /* Cinza escuro */
+            --cor-clara: #ffffff;
+            --cor-escura: #2c3e50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            font-family: 'Open Sans', sans-serif; /* Fonte para o corpo do texto */
+            line-height: 1.7;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Merriweather', serif; /* Fonte para títulos */
+            color: var(--cor-escura);
+        }
+
+        a {
+            color: var(--cor-secundaria);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--cor-primaria);
+        }
+
+        /* --- 2. CABEÇALHO --- */
+        header {
+            background-color: var(--cor-escura);
+            padding: 1rem 5%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+          display: block;
+          width: 150px;  /* Largura exata da sua imagem */
+          height: 60px;  /* Altura exata da sua imagem */
+          
+          background-image: url('https://avivamentobiblico.org/wp-content/uploads/2024/03/logo-IEAB.png');
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: contain; /* Garante que o logo caiba no espaço */
+        }
+
+        /* Classe utilitária para esconder o texto visualmente, mas manter para leitores de tela */
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          border: 0;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: var(--cor-clara);
+            font-weight: 600;
+            padding: 5px 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav a:hover {
+            color: var(--cor-secundaria);
+            border-color: var(--cor-secundaria);
+        }
+
+        /* --- 3. SEÇÃO HERO (BANNER DE BOAS-VINDAS) --- */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://i.ytimg.com/vi/OWgEcKb38Z4/maxresdefault.jpg'); /* Imagem de igreja/comunidade */
+            background-size: cover;
+            background-position: center;
+            height: 90vh; /* Maior para impacto */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--cor-clara);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin-bottom: 2rem;
+        }
+
+        .btn-acao {
+            background-color: var(--cor-secundaria);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+            display: inline-block;
+        }
+
+        .btn-acao:hover {
+            background-color: #2980b9; /* Tom mais escuro */
+        }
+
+        /* --- 4. SEÇÕES DE CONTEÚDO (GENÉRICAS) --- */
+        .section {
+            padding: 4rem 5%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--cor-secundaria);
+            border-radius: 2px;
+        }
+
+        /* --- 5. SEÇÃO DE EVENTOS/CULTOS --- */
+        .eventos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .evento-card {
+            background: var(--cor-clara);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .evento-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
+
+        .evento-card h3 {
+            color: var(--cor-primaria);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        .evento-card p {
+            margin-bottom: 0.8rem;
+        }
+        .evento-card .detalhe {
+            font-weight: 600;
+            color: var(--cor-escura);
+        }
+
+        /* --- 6. RODAPÉ --- */
+        footer {
+            background-color: var(--cor-escura);
+            color: var(--cor-clara);
+            text-align: center;
+            padding: 3rem 5%;
+            margin-top: 4rem;
+        }
+
+        footer h3 {
+            color: var(--cor-clara);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        .social-icons a {
+            color: var(--cor-clara);
+            font-size: 1.8rem;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        .social-icons a:hover {
+            color: var(--cor-secundaria);
+        }
+
+        /* --- RESPONSIVIDADE (MOBILE) --- */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            .hero {
+                height: 70vh;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            .section {
+                padding: 3rem 5%;
+            }
+            .evento-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo"></div>
+        <nav>
+            <ul>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#sobre">Nossa História</a></li>
+                <li><a href="#credo">O Que Cremos</a></li>
+                <li><a href="#eventos">Eventos</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <h1>Bem-Vindo à IEAB</h1>
+        <p>Um lugar de fé, esperança e amor para você e sua família.</p>
+        <a href="#eventos" class="btn-acao">Veja Nossos Cultos</a>
+    </section>
+
+    <section id="sobre" class="section">
+        <h2>Nossa História e Missão</h2>
+        <p>
+            De modo oficial, podemos dizer que o Avivamento Bíblico nasceu a 7 de setembro de 1946, em meio aos eucaliptos que havia no pátio, aos fundos da Faculdade de Teologia da Igreja Metodista do Brasil, em Rudge Ramos, município de São Bernardo do Campo, no Estado de São Paulo.
+            <br><br>
+            Um grupo de irmãos metodistas, das igrejas de Tucuruvi e Vila Mazzei, bairros da capital paulista, estavam crendo no batismo com o Espírito Santo como uma experiência pessoal (e muitos deles já haviam experimentado tal plenitude) e, reunidos nesse local, juntamente com os então seminaristas Mário Roberto Lindstron, Oswaldo Fuentes e Alídio Flora Agostinho, resolveram continuar a Obra iniciada no seio da igreja, sob qualquer circunstância.
+            <br><br>
+            Esta decisão tornou oficial o Movimento, por isso que essa é a data em que se comemora o seu aniversário. Esse grupo de irmãos era conhecido por “grupo de clamor” porque orava intensamente por reavivamento no seio da igreja e pregava a experiência da santificação e batismo no Espírito Santo como grande necessidade para os crentes. Tornou-se um grupo muito ativo em ambas as igrejas.
+            <br><br>
+            Como era de se esperar, não pôde ser tolerado muito tempo no seio da igreja de origem e teve de sair e organizar-se, pretendendo ser mais um movimento que uma denominação. Teve que escolher um nome que o caracterizasse, o qual foi Igreja Evangélica Avivamento Bíblico, como se chama até hoje. Santificação e poder para testemunhar o reavivamento das igrejas, era a ansiedade desses fiéis e corajosos irmãos, que não perdiam oportunidade de orar, estudar a Bíblia, e evangelizar. Muitos destes idealistas já estão com o Senhor e nos são de mui grata e saudosa memória. Dentre eles, destacamos os nomes de Francisco Antonio Barbosa, Pedro Soares Martins, Vírgilio Conti, João Perseghino, Mariana Perseghino, Joana Barbosa, José Ferreira e Cícero Faustino Inojosa, bem como Alídio Flora Agostinho, Mário Roberto Lindstron e Oswaldo Fuentes. Louvamos o Santo Nome do Senhor por essas vidas.
+        </p>
+    </section>
+
+    <section id="credo" class="section" style="background-color: var(--cor-clara);">
+        <h2>O Que Cremos</h2>
+        <p style="text-align: center; margin-bottom: 2rem;">
+            Princípios Gerais e Éticos
+        </p>
+        <div class="servicos-grid"> <div class="evento-card">
+                <h3>A Bíblia</h3>
+                <p>I – A Igreja Evangélica Avivamento Bíblico declara, em sentido geral, que:
+                    <br><br>
+                    – O Avivamento Bíblico é uma denominação evangélica de inspiração divina, fundamentada na Bíblia Sagrada e se destina a orar e trabalhar por avivamento espiritual no Brasil e no mundo.
+
+                    – Seu lema é: “Santidade ao Senhor – Orai sem cessar”.
+
+                    – É orientada pelo seguinte princípio ético : Segui a paz com todos, e a santificação; sem a qual ninguém verá o Senhor (Heb.12:14) .
+
+                    – Compreende por AVIVAMENTO, genuinamente, a ação de Deus dentro dos métodos e condições por ele mesmo estabelecidos em sua Palavra, pela qual os crentes entram na posse das riquezas de sua graça (todas as bênçãos espirituais) e do que resulta poderosa evangelização.
+
+                    – Acredita no seguinte: em um Avivamento , os homens são levados a uma completa separação do mundo e do pecado; consagram-se completamente a Deus e passam a refletir o caráter de Cristo, em seu verdadeiro amor e santificação .
+
+                    – Visto não ser sectarista , não aceita, ou rejeita qualquer crença, idéia ou organização, como um todo, mas analisa, separadamente, cada atitude, idéia e objetivo, confrontando-os com os conceitos e doutrinas bíblicas.
+                    
+                    A Igreja Evangélica Avivamento Bíblico orienta seus membros a:
+
+                    I – dedicarem-se cuidadosamente ao estudo da Bíblia e à oração, a fim de obterem profunda experiência de Cristo em suas próprias vidas, o que será na verdade, experiência pessoal de avivamento ;
+
+                    II – perseverarem em oração por avivamento onde vivem ;
+
+                    III – distinguirem-se por uma vida de poder e santificação, e deste modo, nesta força, atuarem no meio onde exerçam atividades;
+
+                    IV – permanecerem unidos pela comunhão em Cristo e pelo ideal de avivamento espiritual;
+
+                    V – viverem em obediência aos ensinos bíblicos, mantendo profunda lealdade a Cristo.
+
+                    III – A Igreja Evangélica Avivamento Bíblico reconhece que o governo civil, em si mesmo, é instituído por Deus com o objetivo de estabelecer e controlar a ordem social, devendo por isso suas leis e orientações ser observadas.
+
+                    IV – A Igreja Evangélica Avivamento Bíblico não formalizará qualquer posição favorável ou contrária, em relação a qualquer regime, sistema ou partido político.
+
+                    V – Sem assumir qualquer compromisso e com a finalidade única de buscar a glória de Deus e propagar o bem comum, a Igreja poderá combater ou defender medidas e idéias, na proporção em que as mesmas influam nos conceitos bíblicos em relação a qualquer matéria ou qualquer problema.
+
+                    VI – À vista dos princípios bíblicos de que “quem milita não se embaraça com os negócios desta vida”, a Igreja Evangélica Avivamento Bíblico não vê razoabilidade do ministro da Igreja acumular às suas funções , às de militante político.
+
+                    – O referido neste artigo não significa que a Igreja tenha qualquer objeção a que os evangélicos participem de administração pública ou de partidos políticos, pelo contrário, acha bom que o façam, desde que, para tanto, não tenham que negar suas convicções de fé cristã, ou venham a praticar atos que contrariem os ensinos bíblicos.</p>
+            </div>
+            <div class="evento-card">
+                <h3>Deus Trino</h3>
+                <p>Cremos em um só Deus, eternamente existente em três pessoas: Pai, Filho e Espírito Santo.</p>
+            </div>
+            <div class="evento-card">
+                <h3>Salvação</h3>
+                <p>Cremos que a salvação é pela graça, mediante a fé em Jesus Cristo, o único caminho para Deus.</p>
+            </div>
+            </div>
+    </section>
+
+    <section id="eventos" class="section">
+        <h2>Nossos Cultos e Eventos</h2>
+        <div class="eventos-grid">
+            <div class="evento-card">
+                <h3>Culto de Adoração</h3>
+                <p><span class="detalhe">Dia:</span> Domingo</p>
+                <p><span class="detalhe">Horário:</span> 18:00h</p>
+                <p><span class="detalhe">Local:</span> Salão Principal</p>
+            </div>
+            <div class="evento-card">
+                <h3>Estudo Bíblico Semanal</h3>
+                <p><span class="detalhe">Dia:</span> Domingo</p>
+                <p><span class="detalhe">Horário:</span> 17:00h</p>
+                <p><span class="detalhe">Local:</span> Salão Principal</p>
+            </div>
+            <div class="evento-card">
+                <h3>Células de Oração</h3>
+                <p><span class="detalhe">Dia:</span> Terça-Feira</p>
+                <p><span class="detalhe">Horário:</span> 20:00h </p>
+                <p><span class="detalhe">Local:</span> Diversos lares (Entre em contato)</p>
+            </div>
+            <div class="evento-card">
+                <h3>Culto da Família</h3>
+                <p><span class="detalhe">Dia:</span> Quinta-Feira</p>
+                <p><span class="detalhe">Horário:</span> 20:00h </p>
+                <p><span class="detalhe">Local:</span> Salão Principal</p>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 2rem;">
+            Venha nos visitar! Será um prazer ter você conosco.
+        </p>
+    </section>
+
+    <footer id="contato">
+        <h3>Entre em Contato Conosco</h3>
+        <p>📍 Endereço: Rua Calandra, 145</p>
+        <p>📞 Telefone:  +55 (11) 4231-1017</p>
+        <p>📧 Email: contato@avivamentobiblico.com</p>
+        <div class="social-icons" style="margin-top: 1.5rem;">
+            <a href="https://www.facebook.com/suapagina" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/seuinstagram" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/seu_canal" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://wa.me/5511999999999" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <br>
+        <p><small>Desenvolvido com dedicação por [Dante Prado] - Projeto de Extensão Ampli 2025</small></p>
+    </footer>
+
+</body>
+</html>
