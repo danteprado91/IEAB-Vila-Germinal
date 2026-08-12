@@ -1,23 +1,81 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Site oficial da IEAB Vila Germinal - Projeto de Extensão Universitária - Ampli 2025">
+    <meta name="description" content="Site oficial da IEAB - Vila Germinal">
+
+    <!-- Meta Tags Sociais (Open Graph) -->
+    <meta property="og:title" content="IEAB | Vila Germinal">
+    <meta property="og:description" content="Um lugar de fé, esperança e amor para você e sua família.">
+    <meta property="og:image"
+        content="https://avivamentobiblico.org/wp-content/uploads/2025/12/BANNER-CEUS-ABERTOS-WEBP-scaled.webp">
+    <meta property="og:url" content="https://ieab-vila-germinal.vercel.app/">
+    <meta property="og:type" content="website">
+
+    <!-- SEO AVANÇADO: Schema Markup para Igrejas / Organizações Locais -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Church",
+      "name": "IEAB Vila Germinal",
+      "image": "https://avivamentobiblico.org/wp-content/uploads/2024/03/logo-IEAB.png",
+      "@id": "https://ieab-vila-germinal.vercel.app/",
+      "url": "https://ieab-vila-germinal.vercel.app/",
+      "telephone": "+551142311017",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rua Calandra, 145 - Vila Germinal - SP",
+        "addressLocality": "Vila Germinal",
+        "addressRegion": "SP",
+        "addressCountry": "BR"
+      }
+    }
+    </script>
+
+    <link rel="icon" href="https://avivamentobiblico.org/wp-content/uploads/2024/03/logo-IEAB.png" type="image/png">
     <title>IEAB | Vila Germinal</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
-       
+        /* ================= VARIÁVEIS DE CORES ================= */
         :root {
-           
-            --cor-primaria: #2c3e50; /* Azul Marinho */
-            --cor-secundaria: #3498db; /* Azul Claro  */
-            --cor-fundo: #ecf0f1; /* Cinza claro */
-            --cor-texto: #34495e; /* Cinza escuro */
+            --cor-primaria: #2c3e50;
+            --cor-secundaria: #3498db;
+            --cor-fundo: #ecf0f1;
+            --cor-texto: #34495e;
+            --cor-texto-titulo: #2c3e50;
             --cor-clara: #ffffff;
             --cor-escura: #2c3e50;
+            --cor-escura-transparente: rgba(44, 62, 80, 0.95);
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+            --borda-input: #ccc;
+        }
+
+        /* ================= TEMA ESCURO ================= */
+        body.dark-mode {
+            /* Ajuste sutil na cor secundária para melhor contraste no tema escuro */
+            --cor-primaria: #4fa3d1;
+            --cor-secundaria: #4db8ff;
+            --cor-fundo: #121212;
+            --cor-texto: #e0e0e0;
+            --cor-texto-titulo: #ffffff;
+            --cor-clara: #1e1e1e;
+            --cor-escura: #161b22;
+            --cor-escura-transparente: rgba(22, 27, 34, 0.95);
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+            --borda-input: #444;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         * {
@@ -31,11 +89,15 @@
             color: var(--cor-texto);
             font-family: 'Open Sans', sans-serif;
             line-height: 1.7;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        h1, h2, h3 {
+        h1,
+        h2,
+        h3 {
             font-family: 'Merriweather', serif;
-            color: var(--cor-escura);
+            color: var(--cor-texto-titulo);
+            transition: color 0.4s ease;
         }
 
         a {
@@ -48,49 +110,94 @@
             color: var(--cor-primaria);
         }
 
-        /* ---  CABEÇALHO --- */
+        a:focus,
+        button:focus,
+        details:focus,
+        input:focus,
+        textarea:focus {
+            outline: 3px dashed var(--cor-secundaria);
+            outline-offset: 4px;
+        }
+
+        .bg-claro {
+            background-color: var(--cor-clara);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-2 {
+            margin-top: 2rem;
+        }
+
+        .mb-2 {
+            margin-bottom: 2rem;
+        }
+
+        /* ================= CABEÇALHO DINÂMICO ================= */
         header {
-            background-color: var(--cor-escura);
-            padding: 1rem 5%;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            background-color: var(--cor-escura-transparente);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 1.2rem 5%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            transition: padding 0.4s ease, background-color 0.4s ease;
+        }
+
+        header.header-scrolled {
+            padding: 0.5rem 5%;
+            background-color: var(--cor-escura);
         }
 
         .logo {
-          display: block;
-          width: 150px;  
-          height: 60px;  
-          
-          background-image: url('https://avivamentobiblico.org/wp-content/uploads/2024/03/logo-IEAB.png');
-          background-repeat: no-repeat;
-          background-position: center;
-          background-size: contain;
+            display: block;
+            width: 150px;
+            height: 60px;
+            background-image: url('https://avivamentobiblico.org/wp-content/uploads/2024/03/logo-IEAB.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            transition: width 0.4s ease, height 0.4s ease;
+        }
+
+        header.header-scrolled .logo {
+            width: 120px;
+            height: 50px;
         }
 
         .sr-only {
-          position: absolute;
-          width: 1px;
-          height: 1px;
-          padding: 0;
-          margin: -1px;
-          overflow: hidden;
-          clip: rect(0, 0, 0, 0);
-          border: 0;
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
         nav ul {
             display: flex;
             list-style: none;
             gap: 25px;
+            align-items: center;
         }
 
         nav a {
-            color: var(--cor-clara);
+            color: #ffffff;
             font-weight: 600;
             padding: 5px 0;
             border-bottom: 2px solid transparent;
@@ -101,9 +208,32 @@
             border-color: var(--cor-secundaria);
         }
 
-        /* --- (BANNER DE BOAS-VINDAS) --- */
+        .header-btns {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-icon {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .btn-icon:hover {
+            color: var(--cor-secundaria);
+        }
+
+        .menu-toggle {
+            display: none;
+        }
+
+        /* ================= BANNER ================= */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://i.ytimg.com/vi/OWgEcKb38Z4/maxresdefault.jpg');
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://avivamentobiblico.org/wp-content/uploads/2025/12/BANNER-CEUS-ABERTOS-WEBP-scaled.webp');
             background-size: cover;
             background-position: center;
             height: 90vh;
@@ -119,35 +249,44 @@
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1.5rem;
-            color: var(--cor-clara);
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
 
         .hero p {
             font-size: 1.3rem;
             max-width: 700px;
             margin-bottom: 2rem;
+            color: #eeeeee;
         }
 
         .btn-acao {
             background-color: var(--cor-secundaria);
-            color: white;
+            color: #fff;
             padding: 15px 30px;
             border-radius: 5px;
-            text-decoration: none;
             font-weight: bold;
             font-size: 1.1rem;
-            transition: background-color 0.3s;
             display: inline-block;
         }
 
         .btn-acao:hover {
-            background-color: #2980b9; 
+            background-color: #2980b9;
+            color: white;
         }
 
+        body.dark-mode .btn-acao {
+            color: #121212;
+        }
+
+        body.dark-mode .btn-acao:hover {
+            background-color: #80cfff;
+        }
+
+        /* ================= SEÇÕES BÁSICAS ================= */
         .section {
             padding: 4rem 5%;
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
@@ -158,6 +297,7 @@
             position: relative;
             padding-bottom: 15px;
         }
+
         h2::after {
             content: '';
             position: absolute;
@@ -170,7 +310,6 @@
             border-radius: 2px;
         }
 
-        /* ---  EVENTOS/CULTOS --- */
         .eventos-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -182,225 +321,794 @@
             background: var(--cor-clara);
             padding: 2rem;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.08);
-            text-align: left;
+            box-shadow: var(--box-shadow);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
         .evento-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        body.dark-mode .evento-card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
         }
 
         .evento-card h3 {
-            color: var(--cor-primaria);
+            color: var(--cor-secundaria);
             margin-bottom: 1rem;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
         }
-        .evento-card p {
-            margin-bottom: 0.8rem;
-        }
+
         .evento-card .detalhe {
             font-weight: 600;
-            color: var(--cor-escura);
+            color: var(--cor-texto-titulo);
         }
 
-        /* ---  RODAPÉ --- */
+        details summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--cor-secundaria);
+            margin: 1rem 0;
+            transition: color 0.3s ease;
+        }
+
+        details summary:hover {
+            color: var(--cor-primaria);
+        }
+
+        /* ================= GALERIA MASONRY ================= */
+        .galeria-grid {
+            column-count: 3;
+            column-gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .img-galeria {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+            break-inside: avoid;
+        }
+
+        .img-galeria:hover {
+            transform: scale(1.03);
+            filter: brightness(1.1);
+        }
+
+        /* Modal / Lightbox da Galeria */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.ativo {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.3s;
+        }
+
+        .lightbox-close:hover {
+            color: var(--cor-secundaria);
+        }
+
+        /* ================= CONTATO ================= */
+        .contato-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+            background: var(--cor-clara);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .info-contato p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 250px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--borda-input);
+            border-radius: 5px;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            font-family: inherit;
+        }
+
+        .btn-submit {
+            background-color: #25D366;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #20b858;
+        }
+
+        body.dark-mode .btn-submit {
+            color: #fff;
+        }
+
+        /* ================= RODAPÉ ================= */
         footer {
             background-color: var(--cor-escura);
-            color: var(--cor-clara);
+            color: #ffffff;
             text-align: center;
-            padding: 3rem 5%;
-            margin-top: 4rem;
+            padding: 2rem 5%;
         }
 
-        footer h3 {
-            color: var(--cor-clara);
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
-        }
-
-        footer p {
-            margin-bottom: 1rem;
+        .social-icons {
+            margin: 1rem 0;
         }
 
         .social-icons a {
-            color: var(--cor-clara);
+            color: #ffffff;
             font-size: 1.8rem;
             margin: 0 10px;
             transition: color 0.3s ease;
         }
+
         .social-icons a:hover {
             color: var(--cor-secundaria);
         }
 
-        /* --- RESPONSIVIDADE (MOBILE) --- */
+        /* ================= ANIMAÇÕES DE SCROLL (FADE IN) ================= */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.aparecer {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ================= BOTÃO WHATSAPP E BALÃO ================= */
+        .whatsapp-float-container {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 998;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+            animation: pulse-whatsapp 2s infinite;
+            text-decoration: none;
+        }
+
+        .btn-whatsapp:hover {
+            transform: scale(1.1);
+            color: white;
+        }
+
+        .whatsapp-balao {
+            background-color: var(--cor-clara);
+            color: var(--cor-texto-titulo);
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            box-shadow: var(--box-shadow);
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            position: relative;
+            pointer-events: none;
+        }
+
+        /* Triângulo apontando para o botão */
+        .whatsapp-balao::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -10px;
+            transform: translateY(-50%);
+            border-width: 10px 10px 10px 0;
+            border-style: solid;
+            border-color: transparent var(--cor-clara) transparent transparent;
+        }
+
+        .whatsapp-balao.mostrar {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        @keyframes pulse-whatsapp {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        /* ================= BOTÃO VOLTAR AO TOPO ================= */
+        #btn-topo {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--cor-secundaria);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, background-color 0.3s;
+            z-index: 999;
+        }
+
+        body.dark-mode #btn-topo {
+            color: #121212;
+        }
+
+        #btn-topo.mostrar {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #btn-topo:hover {
+            background-color: var(--cor-primaria);
+        }
+
+        /* ================= RESPONSIVIDADE ================= */
+        @media (max-width: 900px) {
+            .galeria-grid {
+                column-count: 2;
+            }
+        }
+
         @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                gap: 15px;
+            .menu-toggle {
+                display: block;
             }
+
+            nav {
+                width: 100%;
+            }
+
             nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: var(--cor-escura);
+                position: absolute;
+                top: 70px;
+                left: 0;
+                padding: 1.5rem 0;
+                box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
             }
-            .hero {
-                height: 70vh;
+
+            nav ul.ativo {
+                display: flex;
             }
+
+            .contato-grid {
+                grid-template-columns: 1fr;
+            }
+
             .hero h1 {
                 font-size: 2.5rem;
             }
+
             .hero p {
                 font-size: 1.1rem;
             }
+
             h2 {
                 font-size: 2rem;
             }
-            .section {
-                padding: 3rem 5%;
+
+            .galeria-grid {
+                column-count: 1;
             }
-            .evento-card {
-                padding: 1.5rem;
+
+            .whatsapp-float-container {
+                bottom: 20px;
+                left: 20px;
+            }
+
+            .btn-whatsapp {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+
+            .whatsapp-balao {
+                display: none;
+            }
+
+            #btn-topo {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
             }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
 
-    <header>
-        <div class="logo"></div>
-        <nav>
-            <ul>
-                <li><a href="#home">Início</a></li>
-                <li><a href="#sobre">Nossa História</a></li>
-                <li><a href="#credo">O Que Cremos</a></li>
-                <li><a href="#eventos">Eventos</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-        </nav>
+    <header id="cabecalho">
+        <a href="#home" class="logo" aria-label="Início">
+            <span class="sr-only">Logo da IEAB Vila Germinal</span>
+        </a>
+
+        <div class="nav-container">
+            <nav>
+                <ul id="menu-principal">
+                    <li><a href="#home" class="menu-link">Início</a></li>
+                    <li><a href="#sobre" class="menu-link">Nossa História</a></li>
+                    <li><a href="#credo" class="menu-link">O Que Cremos</a></li>
+                    <li><a href="#eventos" class="menu-link">Eventos</a></li>
+                    <li><a href="#galeria" class="menu-link">Galeria</a></li>
+                    <li><a href="#contato" class="menu-link">Contato</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-btns">
+                <button id="btn-tema" class="btn-icon" aria-label="Alternar tema escuro/claro">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="btn-menu" class="btn-icon menu-toggle" aria-label="Abrir Menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
     </header>
 
     <section id="home" class="hero">
-        <h1>Bem-Vindo à IEAB</h1>
-        <p>Um lugar de fé, esperança e amor para você e sua família.</p>
-        <a href="#eventos" class="btn-acao">Veja Nossos Cultos</a>
+        <h1 class="fade-in">Bem-Vindo à IEAB</h1>
+        <p class="fade-in">Um lugar de fé, esperança e amor para você e sua família.</p>
+        <a href="#eventos" class="btn-acao fade-in">Veja Nossos Cultos</a>
     </section>
 
     <section id="sobre" class="section">
-        <h2>Nossa História e Missão</h2>
-        <p>
-            De modo oficial, podemos dizer que o Avivamento Bíblico nasceu a 7 de setembro de 1946, em meio aos eucaliptos que havia no pátio, aos fundos da Faculdade de Teologia da Igreja Metodista do Brasil, em Rudge Ramos, município de São Bernardo do Campo, no Estado de São Paulo.
+        <h2 class="fade-in">Nossa História e Missão</h2>
+        <p class="fade-in">
+            De modo oficial, podemos dizer que o Avivamento Bíblico nasceu em 7 de setembro de 1946, em meio aos
+            eucaliptos que havia no pátio, aos fundos da Faculdade de Teologia da Igreja Metodista do Brasil, em Rudge
+            Ramos, município de São Bernardo do Campo, no Estado de São Paulo.
             <br><br>
-            Um grupo de irmãos metodistas, das igrejas de Tucuruvi e Vila Mazzei, bairros da capital paulista, estavam crendo no batismo com o Espírito Santo como uma experiência pessoal (e muitos deles já haviam experimentado tal plenitude) e, reunidos nesse local, juntamente com os então seminaristas Mário Roberto Lindstron, Oswaldo Fuentes e Alídio Flora Agostinho, resolveram continuar a Obra iniciada no seio da igreja, sob qualquer circunstância.
+            Um grupo de irmãos metodistas, das igrejas de Tucuruvi e Vila Mazzei, bairros da capital paulista, estavam
+            crendo no batismo com o Espírito Santo como uma experiência pessoal (e muitos deles já haviam experimentado
+            tal plenitude) e, reunidos nesse local, juntamente com os então seminaristas Mário Roberto Lindstron,
+            Oswaldo Fuentes e Alídio Flora Agostinho, resolveram continuar a Obra iniciada no seio da igreja, sob
+            qualquer circunstância.
             <br><br>
-            Esta decisão tornou oficial o Movimento, por isso que essa é a data em que se comemora o seu aniversário. Esse grupo de irmãos era conhecido por “grupo de clamor” porque orava intensamente por reavivamento no seio da igreja e pregava a experiência da santificação e batismo no Espírito Santo como grande necessidade para os crentes. Tornou-se um grupo muito ativo em ambas as igrejas.
-            <br><br>
-            Como era de se esperar, não pôde ser tolerado muito tempo no seio da igreja de origem e teve de sair e organizar-se, pretendendo ser mais um movimento que uma denominação. Teve que escolher um nome que o caracterizasse, o qual foi Igreja Evangélica Avivamento Bíblico, como se chama até hoje. Santificação e poder para testemunhar o reavivamento das igrejas, era a ansiedade desses fiéis e corajosos irmãos, que não perdiam oportunidade de orar, estudar a Bíblia, e evangelizar. Muitos destes idealistas já estão com o Senhor e nos são de mui grata e saudosa memória. Dentre eles, destacamos os nomes de Francisco Antonio Barbosa, Pedro Soares Martins, Vírgilio Conti, João Perseghino, Mariana Perseghino, Joana Barbosa, José Ferreira e Cícero Faustino Inojosa, bem como Alídio Flora Agostinho, Mário Roberto Lindstron e Oswaldo Fuentes. Louvamos o Santo Nome do Senhor por essas vidas.
+            Esta decisão tornou oficial o Movimento, por isso que essa é a data em que se comemora o seu aniversário.
         </p>
     </section>
 
-    <section id="credo" class="section" style="background-color: var(--cor-clara);">
-        <h2>O Que Cremos</h2>
-        <p style="text-align: center; margin-bottom: 2rem;">
-            Princípios Gerais e Éticos
-        </p>
-        <div class="servicos-grid"> <div class="evento-card">
+    <section id="credo" class="section bg-claro">
+        <h2 class="fade-in">O Que Cremos</h2>
+        <p class="text-center mb-2 fade-in">Princípios Gerais e Éticos</p>
+
+        <div class="eventos-grid">
+            <div class="evento-card fade-in">
                 <h3>A Bíblia</h3>
-                <p>I – A Igreja Evangélica Avivamento Bíblico declara, em sentido geral, que:
-                    <br><br>
-                    – O Avivamento Bíblico é uma denominação evangélica de inspiração divina, fundamentada na Bíblia Sagrada e se destina a orar e trabalhar por avivamento espiritual no Brasil e no mundo.
-                     <br><br>
-                    – Seu lema é: “Santidade ao Senhor – Orai sem cessar”.
-                     <br><br>
-                    – É orientada pelo seguinte princípio ético : Segui a paz com todos, e a santificação; sem a qual ninguém verá o Senhor (Heb.12:14) .
-                     <br><br>
-                    – Compreende por AVIVAMENTO, genuinamente, a ação de Deus dentro dos métodos e condições por ele mesmo estabelecidos em sua Palavra, pela qual os crentes entram na posse das riquezas de sua graça (todas as bênçãos espirituais) e do que resulta poderosa evangelização.
-                     <br><br>
-                    – Acredita no seguinte: em um Avivamento , os homens são levados a uma completa separação do mundo e do pecado; consagram-se completamente a Deus e passam a refletir o caráter de Cristo, em seu verdadeiro amor e santificação .
-                     <br><br>
-                    – Visto não ser sectarista , não aceita, ou rejeita qualquer crença, idéia ou organização, como um todo, mas analisa, separadamente, cada atitude, idéia e objetivo, confrontando-os com os conceitos e doutrinas bíblicas.
-                     <br><br>
-                    A Igreja Evangélica Avivamento Bíblico orienta seus membros a:
-                     <br><br>
-                    I – dedicarem-se cuidadosamente ao estudo da Bíblia e à oração, a fim de obterem profunda experiência de Cristo em suas próprias vidas, o que será na verdade, experiência pessoal de avivamento ;
-                     <br><br>
-                    II – perseverarem em oração por avivamento onde vivem ;
-                     <br><br>
-                    III – distinguirem-se por uma vida de poder e santificação, e deste modo, nesta força, atuarem no meio onde exerçam atividades;
-                     <br><br>
-                    IV – permanecerem unidos pela comunhão em Cristo e pelo ideal de avivamento espiritual;
-                     <br><br>
-                    V – viverem em obediência aos ensinos bíblicos, mantendo profunda lealdade a Cristo.
-                     <br><br>
-                    III – A Igreja Evangélica Avivamento Bíblico reconhece que o governo civil, em si mesmo, é instituído por Deus com o objetivo de estabelecer e controlar a ordem social, devendo por isso suas leis e orientações ser observadas.
-                     <br><br>
-                    IV – A Igreja Evangélica Avivamento Bíblico não formalizará qualquer posição favorável ou contrária, em relação a qualquer regime, sistema ou partido político.
-                     <br><br>
-                    V – Sem assumir qualquer compromisso e com a finalidade única de buscar a glória de Deus e propagar o bem comum, a Igreja poderá combater ou defender medidas e idéias, na proporção em que as mesmas influam nos conceitos bíblicos em relação a qualquer matéria ou qualquer problema.
-                     <br><br>
-                    VI – À vista dos princípios bíblicos de que “quem milita não se embaraça com os negócios desta vida”, a Igreja Evangélica Avivamento Bíblico não vê razoabilidade do ministro da Igreja acumular às suas funções , às de militante político.
-                     <br><br>
-                    – O referido neste artigo não significa que a Igreja tenha qualquer objeção a que os evangélicos participem de administração pública ou de partidos políticos, pelo contrário, acha bom que o façam, desde que, para tanto, não tenham que negar suas convicções de fé cristã, ou venham a praticar atos que contrariem os ensinos bíblicos.</p>
+                <p>A Igreja Evangélica Avivamento Bíblico declara, em sentido geral, que:</p>
+                <details>
+                    <summary>Ler princípios completos</summary>
+                    <p>
+                        – O Avivamento Bíblico é uma denominação evangélica de inspiração divina, fundamentada na Bíblia
+                        Sagrada.<br><br>
+                        – Seu lema é: “Santidade ao Senhor – Orai sem cessar”.<br><br>
+                        – É orientada pelo seguinte princípio ético: Segui a paz com todos, e a santificação; sem a qual
+                        ninguém verá o Senhor (Heb.12:14).<br><br>
+                        I – dedicarem-se cuidadosamente ao estudo da Bíblia e à oração.<br>
+                        II – perseverarem em oração por avivamento onde vivem.<br>
+                        III – distinguirem-se por uma vida de poder e santificação, e deste modo, nesta força, atuarem
+                        no meio onde exerçam atividades.<br>
+                        IV – permanecerem unidos pela comunhão em Cristo e pelo ideal de avivamento espiritual.<br>
+
+                        V – viverem em obediência aos ensinos bíblicos, mantendo profunda lealdade a Cristo.<br>
+
+                        III – A Igreja Evangélica Avivamento Bíblico reconhece que o governo civil, em si mesmo, é
+                        instituído por Deus com o objetivo de estabelecer e controlar a ordem social, devendo por isso
+                        suas leis e orientações ser observadas.<br>
+
+                        IV – A Igreja Evangélica Avivamento Bíblico não formalizará qualquer posição favorável ou
+                        contrária, em relação a qualquer regime, sistema ou partido político.<br>
+
+                        V – Sem assumir qualquer compromisso e com a finalidade única de buscar a glória de Deus e
+                        propagar o bem comum, a Igreja poderá combater ou defender medidas e idéias, na proporção em que
+                        as mesmas influam nos conceitos bíblicos em relação a qualquer matéria ou qualquer problema.<br>
+
+                        VI – À vista dos princípios bíblicos de que “quem milita não se embaraça com os negócios desta
+                        vida”, a Igreja Evangélica Avivamento Bíblico não vê razoabilidade do ministro da Igreja
+                        acumular às suas funções , às de militante político.<br><br>
+
+                        – O referido neste artigo não significa que a Igreja tenha qualquer objeção a que os evangélicos
+                        participem de administração pública ou de partidos políticos, pelo contrário, acha bom que o
+                        façam, desde que, para tanto, não tenham que negar suas convicções de fé cristã, ou venham a
+                        praticar atos que contrariem os ensinos bíblicos.
+                    </p>
+                </details>
             </div>
-            <div class="evento-card">
+
+            <div class="evento-card fade-in">
                 <h3>Deus Trino</h3>
                 <p>Cremos em um só Deus, eternamente existente em três pessoas: Pai, Filho e Espírito Santo.</p>
             </div>
-            <div class="evento-card">
+
+            <div class="evento-card fade-in">
                 <h3>Salvação</h3>
                 <p>Cremos que a salvação é pela graça, mediante a fé em Jesus Cristo, o único caminho para Deus.</p>
             </div>
-            </div>
+        </div>
     </section>
 
     <section id="eventos" class="section">
-        <h2>Nossos Cultos e Eventos</h2>
+        <h2 class="fade-in">Nossos Cultos e Eventos</h2>
         <div class="eventos-grid">
-            <div class="evento-card">
+            <div class="evento-card fade-in">
                 <h3>Culto de Adoração</h3>
                 <p><span class="detalhe">Dia:</span> Domingo</p>
                 <p><span class="detalhe">Horário:</span> 18:00h</p>
                 <p><span class="detalhe">Local:</span> Salão Principal</p>
             </div>
-            <div class="evento-card">
+            <div class="evento-card fade-in">
                 <h3>Estudo Bíblico Semanal</h3>
                 <p><span class="detalhe">Dia:</span> Domingo</p>
                 <p><span class="detalhe">Horário:</span> 17:00h</p>
                 <p><span class="detalhe">Local:</span> Salão Principal</p>
             </div>
-            <div class="evento-card">
+            <div class="evento-card fade-in">
                 <h3>Células de Oração</h3>
                 <p><span class="detalhe">Dia:</span> Terça-Feira</p>
                 <p><span class="detalhe">Horário:</span> 20:00h </p>
-                <p><span class="detalhe">Local:</span> Diversos lares (Entre em contato)</p>
+                <p><span class="detalhe">Local:</span> Diversos lares</p>
             </div>
-            <div class="evento-card">
+            <div class="evento-card fade-in">
                 <h3>Culto da Família</h3>
                 <p><span class="detalhe">Dia:</span> Quinta-Feira</p>
                 <p><span class="detalhe">Horário:</span> 20:00h </p>
                 <p><span class="detalhe">Local:</span> Salão Principal</p>
             </div>
         </div>
-        <p style="text-align: center; margin-top: 2rem;">
-            Venha nos visitar! Será um prazer ter você conosco.
-        </p>
     </section>
 
-    <footer id="contato">
-        <h3>Entre em Contato Conosco</h3>
-        <p>📍 Endereço: Rua Calandra, 145 - Vila Germinal</p>
-        <p>📞 Telefone:  +55 (11) 4231-1017</p>
-        <p>📧 Email: contato@avivamentobiblico.com</p>
-        <div class="social-icons" style="margin-top: 1.5rem;">
-            <a href="https://www.facebook.com/IEABGerminal/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/ieab_vilagerminal" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.youtube.com/@IEAB_VilaGerminal" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-            <a href="https://wa.me/5511961061371" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <section id="galeria" class="section bg-claro">
+        <h2 class="fade-in">Nossa Comunidade</h2>
+        <p class="text-center mb-2 fade-in">Um pouco dos nossos encontros e momentos especiais.</p>
+
+        <div class="galeria-grid fade-in">
+            <!-- Adicionado atributo width/height para prevenir CLS e loading="lazy" para performance -->
+            <img src="https://images.unsplash.com/photo-1438283173091-5dbf5c5a3206?auto=format&fit=crop&w=600&q=80"
+                alt="Momentos de Louvor" class="img-galeria" width="600" height="400" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1548625361-ec2e31e9c20a?auto=format&fit=crop&w=600&q=80"
+                alt="Estudo Bíblico" class="img-galeria" width="600" height="400" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1445620466293-d6316372ab59?auto=format&fit=crop&w=600&q=80"
+                alt="Comunhão da Igreja" class="img-galeria" width="600" height="400" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1510590337019-5ef8d3d32116?auto=format&fit=crop&w=600&q=80"
+                alt="Culto de Domingo" class="img-galeria" width="600" height="400" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=600&q=80"
+                alt="Banda e Ministério de Louvor" class="img-galeria" width="600" height="400" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1473172043694-81eb495e87a2?auto=format&fit=crop&w=600&q=80"
+                alt="Ações Especiais" class="img-galeria" width="600" height="400" loading="lazy">
         </div>
-        <br>
-        <p><small>Desenvolvido com dedicação por Dante Prado - Projeto de Extensão Ampli 2025</small></p>
+    </section>
+
+    <!-- Lightbox da Galeria -->
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Visualizador de imagem">
+        <span class="lightbox-close" aria-label="Fechar lightbox">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Imagem ampliada">
+    </div>
+
+    <section id="contato" class="section">
+        <h2 class="fade-in">Fale Conosco</h2>
+
+        <div class="contato-grid fade-in">
+            <div class="info-contato">
+                <h3>Envie uma Mensagem</h3>
+                <p>Ficou com alguma dúvida ou precisa de oração? Preencha o formulário e você será direcionado ao nosso
+                    WhatsApp.</p>
+                <!-- Formulário alterado para não realizar envio tradicional (action=""), 
+                     o envio é interceptado no JavaScript -->
+                <form id="form-contato">
+                    <div class="form-group">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" name="nome" required placeholder="Digite seu nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea id="mensagem" name="mensagem" rows="4" required
+                            placeholder="Como podemos ajudar?"></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <i class="fab fa-whatsapp"></i> Enviar pelo WhatsApp
+                    </button>
+                </form>
+            </div>
+
+            <div class="map-container">
+                <h3>Nossa Localização</h3>
+                <p>📍 Rua Calandra, 145 - Vila Germinal - SP</p>
+                <p>📞 +55 (11) 4231-1017</p>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3659.81758380158!2d-46.59515232401694!3d-23.467043578864658!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cef5d81d9d3be1%3A0x1d2df819c795124e!2sR.%20Calandra%2C%20145%20-%20Vila%20Germinal%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2002275-000!5e0!3m2!1spt-BR!2sbr!4v1786542338577!5m2!1spt-BR!2sbr"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/IEABGerminal/" target="_blank" aria-label="Facebook"><i
+                    class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/ieab_vilagerminal" target="_blank" aria-label="Instagram"><i
+                    class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@IEAB_VilaGerminal" target="_blank" aria-label="YouTube"><i
+                    class="fab fa-youtube"></i></a>
+            <a href="https://wa.me/5511961061371" target="_blank" aria-label="WhatsApp"><i
+                    class="fab fa-whatsapp"></i></a>
+        </div>
+        <p>&copy; 2025 IEAB Vila Germinal. Todos os direitos reservados.</p>
+        <p><small>Desenvolvido com dedicação por Dante Prado</small></p>
     </footer>
 
+    <!-- Botão WhatsApp Flutuante -->
+    <div class="whatsapp-float-container">
+        <a href="https://wa.me/5511961061371" target="_blank" class="btn-whatsapp"
+            aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <div class="whatsapp-balao" id="balao-whats">Olá! Como podemos te ajudar hoje?</div>
+    </div>
+
+    <!-- Botão Voltar ao Topo -->
+    <button id="btn-topo" aria-label="Voltar ao topo"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- ================= SCRIPTS ================= -->
+    <script>
+        // 1. MENU DINÂMICO AO ROLAR E MENU MOBILE
+        const cabecalho = document.getElementById('cabecalho');
+        const btnMenu = document.getElementById('btn-menu');
+        const menuPrincipal = document.getElementById('menu-principal');
+        const menuLinks = document.querySelectorAll('.menu-link');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                cabecalho.classList.add('header-scrolled');
+            } else {
+                cabecalho.classList.remove('header-scrolled');
+            }
+        });
+
+        btnMenu.addEventListener('click', () => {
+            const isAtivo = menuPrincipal.classList.toggle('ativo');
+            // Melhoria de acessibilidade (A11y)
+            btnMenu.setAttribute('aria-expanded', isAtivo);
+
+            const icone = btnMenu.querySelector('i');
+            icone.classList.toggle('fa-bars');
+            icone.classList.toggle('fa-times');
+        });
+
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuPrincipal.classList.remove('ativo');
+                btnMenu.setAttribute('aria-expanded', 'false');
+                const icone = btnMenu.querySelector('i');
+                icone.classList.remove('fa-times');
+                icone.classList.add('fa-bars');
+            });
+        });
+
+        // 2. DARK MODE (Melhorado para verificar preferência do sistema)
+        const btnTema = document.getElementById('btn-tema');
+        const iconeTema = btnTema.querySelector('i');
+        const body = document.body;
+
+        const temaSalvo = localStorage.getItem('tema');
+        const prefereEscuro = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (temaSalvo === 'escuro' || (!temaSalvo && prefereEscuro)) {
+            body.classList.add('dark-mode');
+            iconeTema.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        btnTema.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                iconeTema.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('tema', 'escuro');
+            } else {
+                iconeTema.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('tema', 'claro');
+            }
+        });
+
+        // 3. ANIMAÇÃO DE SCROLL (FADE-IN)
+        const elementosFade = document.querySelectorAll('.fade-in');
+        const observador = new IntersectionObserver((entradas) => {
+            entradas.forEach(entrada => {
+                if (entrada.isIntersecting) {
+                    entrada.target.classList.add('aparecer');
+                    observador.unobserve(entrada.target);
+                }
+            });
+        }, {threshold: 0.1});
+
+        elementosFade.forEach(elemento => {observador.observe(elemento);});
+
+        // 4. GALERIA LIGHTBOX (Melhorado com fechamento via teclado "Escape")
+        const fotos = document.querySelectorAll('.img-galeria');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.querySelector('.lightbox-close');
+
+        function fecharLightbox() {
+            lightbox.classList.remove('ativo');
+        }
+
+        fotos.forEach(foto => {
+            foto.addEventListener('click', () => {
+                lightboxImg.src = foto.src;
+                lightbox.classList.add('ativo');
+            });
+        });
+
+        lightboxClose.addEventListener('click', fecharLightbox);
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) fecharLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('ativo')) {
+                fecharLightbox();
+            }
+        });
+
+        // 5. ENVIO DO FORMULÁRIO PARA O WHATSAPP
+        const formContato = document.getElementById('form-contato');
+
+        formContato.addEventListener('submit', (e) => {
+            e.preventDefault(); // Impede o recarregamento da página
+
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const mensagem = document.getElementById('mensagem').value;
+
+            // Número de destino
+            const numeroWhatsApp = "5511961061371";
+
+            // Montagem da mensagem formatada
+            const texto = `Olá! Meu nome é ${nome}.\nE-mail: ${email}\n\nMensagem:\n${mensagem}`;
+
+            // Codifica a mensagem para formato de URL (substitui espaços por %20, \n por %0A, etc)
+            const textoCodificado = encodeURIComponent(texto);
+
+            // Cria o link final da API do WhatsApp
+            const linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${textoCodificado}`;
+
+            // Abre o link em uma nova aba
+            window.open(linkWhatsApp, '_blank');
+
+            // Opcional: Limpa o formulário após o envio
+            formContato.reset();
+        });
+
+        // 6. BOTÕES FLUTUANTES (WhatsApp e Topo)
+        const btnTopo = document.getElementById('btn-topo');
+        const balaoWhats = document.getElementById('balao-whats');
+
+        setTimeout(() => {
+            balaoWhats.classList.add('mostrar');
+        }, 3000);
+
+        setTimeout(() => {
+            balaoWhats.classList.remove('mostrar');
+        }, 15000);
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                btnTopo.classList.add('mostrar');
+            } else {
+                btnTopo.classList.remove('mostrar');
+            }
+        });
+
+        btnTopo.addEventListener('click', () => {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+    </script>
 </body>
+
 </html>
